@@ -5,6 +5,7 @@ import {Login} from '../screens/Login';
 import {Signup} from '../screens/Signup';
 import Home from '../screens/Home/Home';
 import auth from '@react-native-firebase/auth';
+import Chat from '../screens/Chat/Chat';
 
 export const RootNavigator = () => {
   const Stack = createStackNavigator();
@@ -26,7 +27,10 @@ export const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       {user ? (
-        <Stack.Screen name="Home" component={Home} />
+        <>
+          <Stack.Screen name="Home" children={() => <Home user={user} />} />
+          <Stack.Screen name="Chat" component={Chat} />
+        </>
       ) : (
         <>
           <Stack.Screen name="Login" component={Login} />
