@@ -17,6 +17,7 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import {RegExp} from '../../constants/Regex';
 import ValidationError from '../../components/ValidationError';
+import {styles} from './styles';
 
 export const Signup = () => {
   const [email, setEmail] = useState('');
@@ -137,42 +138,28 @@ export const Signup = () => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: colors.white}}>
-      <View style={{flex: 1}}>
-        <View style={{alignItems: 'center', marginTop: 20}}>
+    <View style={styles.flex}>
+      <View style={styles.flex2}>
+        <View style={styles.imageWrapper}>
           {profileImage.length > 0 ? (
             <Image
               source={{uri: profileImage}}
-              style={{
-                height: 120,
-                width: 120,
-                borderRadius: 60,
-              }}
+              style={styles.image}
               resizeMode="contain"
             />
           ) : (
             <Image
               source={Images.userPlaceholder}
-              style={{
-                height: 120,
-                width: 120,
-              }}
+              style={styles.image2}
               resizeMode="contain"
             />
           )}
         </View>
-        <View style={{flex: 1}}>
+        <View style={styles.flex2}>
           <View>
             <TextInput
               placeholder="Name"
-              style={{
-                borderColor: colors.grey,
-                borderWidth: 2,
-                borderRadius: 8,
-                marginHorizontal: 16,
-                paddingLeft: 16,
-                marginTop: 20,
-              }}
+              style={styles.input}
               value={name}
               onChangeText={val => {
                 setName(val);
@@ -184,14 +171,7 @@ export const Signup = () => {
           <View>
             <TextInput
               placeholder="Email"
-              style={{
-                borderColor: colors.grey,
-                borderWidth: 2,
-                borderRadius: 8,
-                marginHorizontal: 16,
-                paddingLeft: 16,
-                marginTop: 20,
-              }}
+              style={styles.input}
               value={email}
               onChangeText={val => {
                 setEmail(val);
@@ -204,14 +184,7 @@ export const Signup = () => {
             <TextInput
               placeholder="Password"
               secureTextEntry={true}
-              style={{
-                borderColor: colors.grey,
-                borderWidth: 2,
-                borderRadius: 8,
-                marginHorizontal: 16,
-                paddingLeft: 16,
-                marginTop: 20,
-              }}
+              style={styles.input}
               value={password}
               onChangeText={val => {
                 setPassword(val);
@@ -226,14 +199,7 @@ export const Signup = () => {
             <TextInput
               placeholder="Phone Number"
               maxLength={10}
-              style={{
-                borderColor: colors.grey,
-                borderWidth: 2,
-                borderRadius: 8,
-                marginHorizontal: 16,
-                paddingLeft: 16,
-                marginTop: 20,
-              }}
+              style={styles.input}
               value={mobile}
               keyboardType="number-pad"
               onChangeText={val => {
@@ -244,24 +210,8 @@ export const Signup = () => {
             {mobileError ? <ValidationError errorText={mobileError} /> : null}
           </View>
         </View>
-        <TouchableOpacity
-          onPress={pickImage}
-          style={[
-            {
-              height: 50,
-              backgroundColor: colors.Green,
-              marginHorizontal: 16,
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginVertical: 20,
-              borderRadius: 8,
-              borderColor: colors.white,
-              borderWidth: 2,
-            },
-          ]}>
-          <Text style={{fontSize: 20, color: colors.white}}>
-            Select Profile Picture
-          </Text>
+        <TouchableOpacity onPress={pickImage} style={[styles.selectImage]}>
+          <Text style={styles.signup}>Select Profile Picture</Text>
         </TouchableOpacity>
         <TouchableOpacity
           disabled={profileURL.length == 0 ? true : false}
@@ -269,26 +219,14 @@ export const Signup = () => {
             setLoading(true);
             SignupHandler();
           }}
-          style={{
-            height: 50,
-            backgroundColor: colors.Green,
-            marginHorizontal: 16,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: 20,
-            borderRadius: 8,
-            borderColor: colors.white,
-            borderWidth: 2,
-          }}>
+          style={styles.signupButton}>
           {loading ? (
             <ActivityIndicator color={colors.white} size="small" />
           ) : (
-            <Text style={{fontSize: 20, color: colors.white}}>Sign Up</Text>
+            <Text style={styles.signup}>Sign Up</Text>
           )}
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({});

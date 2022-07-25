@@ -3,10 +3,10 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {GiftedChat} from 'react-native-gifted-chat';
 import firestore from '@react-native-firebase/firestore';
 import {useRoute} from '@react-navigation/native';
+import {styles} from './styles';
 
 const Chat = () => {
   const route: any = useRoute();
-  //   console.log('🚀 ~ file: Chat.tsx ~ line 9 ~ Chat ~ route', route);
   const [messages, setMessages]: any = useState([]);
 
   const getAllMsg = async () => {
@@ -87,7 +87,7 @@ const Chat = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.flex}>
       <GiftedChat
         messages={messages}
         onSend={messages => onSend(messages)}
@@ -100,5 +100,3 @@ const Chat = () => {
 };
 
 export default Chat;
-
-const styles = StyleSheet.create({});

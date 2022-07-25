@@ -15,6 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 import {RegExp} from '../../constants/Regex';
 import ValidationError from '../../components/ValidationError';
 import auth from '@react-native-firebase/auth';
+import {styles} from './styles';
 
 export const Login = () => {
   const navigation: any = useNavigation();
@@ -61,33 +62,21 @@ export const Login = () => {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-      }}>
-      <View style={{flex: 1}}>
-        <View style={{alignItems: 'center', marginTop: 50}}>
+    <View style={styles.flex}>
+      <View style={styles.flex}>
+        <View style={styles.imageWrapper}>
           <Image
             source={Images.Logo}
-            style={{height: 100, width: 100}}
+            style={styles.image}
             resizeMode="contain"
           />
-          <Text style={{fontSize: 22, color: colors.Green, marginTop: 20}}>
-            Welcome to WhatsApp
-          </Text>
+          <Text style={styles.welcome}>Welcome to WhatsApp</Text>
         </View>
-        <View style={{marginTop: 50}}>
+        <View style={styles.imageWrapper}>
           <View>
             <TextInput
               placeholder="Email"
-              style={{
-                borderColor: colors.grey,
-                borderWidth: 2,
-                borderRadius: 8,
-                marginHorizontal: 16,
-                paddingLeft: 16,
-                marginTop: 20,
-              }}
+              style={styles.input}
               value={email}
               onChangeText={val => {
                 setEmail(val);
@@ -99,14 +88,7 @@ export const Login = () => {
           <View>
             <TextInput
               placeholder="Password"
-              style={{
-                borderColor: colors.grey,
-                borderWidth: 2,
-                borderRadius: 8,
-                marginHorizontal: 16,
-                paddingLeft: 16,
-                marginTop: 20,
-              }}
+              style={styles.input}
               value={password}
               onChangeText={val => {
                 setPassword(val);
@@ -119,43 +101,23 @@ export const Login = () => {
           </View>
         </View>
       </View>
-      <TouchableOpacity
-        onPress={LoginHandler}
-        style={{
-          height: 50,
-          backgroundColor: colors.Green,
-          marginHorizontal: 16,
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginBottom: 5,
-          borderRadius: 8,
-          borderColor: colors.white,
-          borderWidth: 2,
-        }}>
+      <TouchableOpacity onPress={LoginHandler} style={styles.buttton}>
         {loading ? (
           <ActivityIndicator color={colors.white} size="small" />
         ) : (
-          <Text style={{fontSize: 20, color: colors.white}}>Login</Text>
+          <Text style={styles.login}>Login</Text>
         )}
       </TouchableOpacity>
-      <Text
-        style={{
-          fontSize: 16,
-          color: colors.black,
-          textAlign: 'center',
-          marginBottom: 20,
-        }}>
+      <Text style={styles.text2}>
         Don't have an account?{' '}
         <Text
           onPress={() => {
             navigation.navigate('Signup');
           }}
-          style={{fontSize: 16, color: colors.Green}}>
+          style={styles.signup}>
           Signup
         </Text>
       </Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
