@@ -72,33 +72,27 @@ export const Login = () => {
           />
           <Text style={styles.welcome}>Welcome to WhatsApp</Text>
         </View>
-        <View style={styles.imageWrapper}>
-          <View>
-            <TextInput
-              placeholder="Email"
-              style={styles.input}
-              value={email}
-              onChangeText={val => {
-                setEmail(val);
-                setEmailError('');
-              }}
-            />
-            {emailError ? <ValidationError errorText={emailError} /> : null}
-          </View>
-          <View>
-            <TextInput
-              placeholder="Password"
-              style={styles.input}
-              value={password}
-              onChangeText={val => {
-                setPassword(val);
-                setPasswordError('');
-              }}
-            />
-            {passwordError ? (
-              <ValidationError errorText={passwordError} />
-            ) : null}
-          </View>
+        <View>
+          <TextInput
+            placeholder="Email"
+            style={styles.input}
+            value={email}
+            onChangeText={val => {
+              setEmail(val);
+              setEmailError('');
+            }}
+          />
+          {emailError ? <ValidationError errorText={emailError} /> : null}
+          <TextInput
+            placeholder="Password"
+            style={styles.input}
+            value={password}
+            onChangeText={val => {
+              setPassword(val);
+              setPasswordError('');
+            }}
+          />
+          {passwordError ? <ValidationError errorText={passwordError} /> : null}
         </View>
       </View>
       <TouchableOpacity onPress={LoginHandler} style={styles.buttton}>

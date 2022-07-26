@@ -127,6 +127,7 @@ export const Signup = () => {
               mobile: mobile,
               profileImage: profileURL,
               uid: Math.random() * 10,
+              friendList: [],
             });
           Alert.alert('User Registered succesfully.');
         })

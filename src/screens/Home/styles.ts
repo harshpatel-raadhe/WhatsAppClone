@@ -3,8 +3,15 @@ import {colors} from '../../Theme';
 
 export const styles = StyleSheet.create({
   main: {flex: 1},
-  nameText: {
+  center: {justifyContent: 'center', alignItems: 'center'},
+  headerWrapper: {
+    flexDirection: 'row',
+    backgroundColor: colors.Green,
+    alignItems: 'center',
     padding: 16,
+  },
+  nameText: {
+    flex: 1,
     fontSize: 20,
     backgroundColor: colors.Green,
     color: colors.white,
@@ -18,6 +25,7 @@ export const styles = StyleSheet.create({
   image: {height: 50, width: 50, borderRadius: 25},
   nameWrapper: {marginLeft: 16},
   name2: {fontSize: 18, color: colors.black},
+  name3: {fontSize: 22, color: colors.black, fontWeight: '600'},
   line: {height: 1, backgroundColor: colors.grey},
   button: {
     justifyContent: 'center',
