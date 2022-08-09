@@ -1,14 +1,10 @@
-import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
-import {Images} from '../../../assets/Images';
-import {colors} from '../../Theme';
-import {PlusIcon} from './PlusIcon';
 import {styles} from './styles';
 
-const Home = ({user}: any) => {
+export const Friends = ({user}: any) => {
   const Focus = useIsFocused();
   const navigation: any = useNavigation();
   const [users, setUsers]: any = useState([]);
@@ -34,7 +30,7 @@ const Home = ({user}: any) => {
       .map((item: any) => {
         let a = allUsers
           .map((data: any) => {
-            return data.uid === item.id && item?.isMessaged ? data : null;
+            return data.uid === item.id && !item?.isMessaged ? data : null;
           })
           .filter(s => s?.email && s);
         return a[0];
@@ -48,20 +44,7 @@ const Home = ({user}: any) => {
   return (
     <View style={styles.main}>
       <View style={styles.headerWrapper}>
-        <Text style={styles.nameText}>Hello, {owner[0]?.name}</Text>
-        <TouchableOpacity
-          style={{marginRight: 16}}
-          onPress={() => {
-            navigation.navigate('Friends');
-          }}>
-          <PlusIcon color={colors.white} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            auth().signOut();
-          }}>
-          <Image source={Images.logout} style={{height: 24, width: 24}} />
-        </TouchableOpacity>
+        <Text style={styles.nameText}>Friends</Text>
       </View>
       <View style={styles.main}>
         {users.length ? (
@@ -99,15 +82,6 @@ const Home = ({user}: any) => {
           </View>
         )}
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Users');
-        }}
-        style={styles.button}>
-        <Text style={styles.logout}>Show all users</Text>
-      </TouchableOpacity>
     </View>
   );
 };
-
-export default Home;

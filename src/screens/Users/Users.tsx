@@ -1,3 +1,7 @@
+import {firebase} from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   Image,
@@ -6,14 +10,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import firestore from '@react-native-firebase/firestore';
+import {ArrowLeftIcon} from '../../../assets/Icons';
 import {colors} from '../../Theme';
-import {firebase} from '@react-native-firebase/auth';
 
 export const Users = () => {
   const user: any = firebase.auth().currentUser;
-
+  const navigation = useNavigation();
   const [users, setUsers]: any = useState([]);
   const [owner, setOwner]: any = useState([]);
   const [friends, setFriends]: any = useState([]);
@@ -44,8 +46,12 @@ export const Users = () => {
   };
 
   const addFriend = (item: any) => {
-    setFriends([...friends, item.uid]);
-    let addUsers = [...friends, ...owner[0]?.friendList, item.uid];
+    setFriends([...friends, {id: item.uid, isMessaged: false}]);
+    let addUsers = [
+      ...friends,
+      ...owner[0]?.friendList,
+      {id: item.uid, isMessaged: false},
+    ];
     let restUsers = users.filter((val: any) => val.uid !== item.uid && val);
     setUsers(restUsers);
     firestore().collection('users').doc(user.uid).set({
@@ -60,7 +66,21 @@ export const Users = () => {
 
   return (
     <View style={styles.main}>
-      <Text style={styles.nameText}>All Users</Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          backgroundColor: colors.Green,
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity
+          style={{margin: 8}}
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <ArrowLeftIcon color={colors.white} />
+        </TouchableOpacity>
+        <Text style={styles.nameText}>All Users</Text>
+      </View>
       <View style={styles.main}>
         <FlatList
           data={users}

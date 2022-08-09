@@ -79,11 +79,11 @@ const Chat = () => {
       route.params.owner[0]?.uid > route.params.user.uid
         ? route.params.user.uid + '-' + route.params.owner[0]?.uid
         : route.params.owner[0]?.uid + '-' + route.params.user.uid;
-    firestore()
-      .collection('chatrooms')
-      .doc(docId)
-      .collection('messages')
-      .add({...mymsg, createdAt: firestore.FieldValue.serverTimestamp()});
+    // firestore()
+    //   .collection('chatrooms')
+    //   .doc(docId)
+    //   .collection('messages')
+    //   .add({...mymsg, createdAt: firestore.FieldValue.serverTimestamp()});
   };
 
   return (
